@@ -83,7 +83,7 @@ export const BookingLookup: React.FC = () => {
         <div className="space-y-4">
           {results.length === 0 ? (
             <div className="text-center py-10 px-4 border border-dashed border-white/15 rounded-3xl bg-black/20 text-slate-400">
-              <span className="text-3xl block mb-2">🔍</span>
+              <Search className="w-8 h-8 mx-auto mb-2 text-slate-500" />
               <strong className="block text-white font-medium mb-1">Nessuna prenotazione trovata</strong>
               <span className="text-xs">Verifica il codice o il numero di telefono inserito e riprova.</span>
             </div>

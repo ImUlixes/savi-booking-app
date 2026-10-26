@@ -3,7 +3,8 @@ import { supabaseService } from '../../lib/supabase';
 import { Booking, BookingStatus, KPIMetrics, TableArea } from '../../types';
 import { 
   Shield, Lock, Unlock, Calendar, Users, Phone, Mail, 
-  Check, CheckCheck, X, Plus, Search, MessageSquare, AlertTriangle 
+  Check, CheckCheck, X, Plus, Search, MessageSquare, AlertTriangle,
+  Sparkles, Clock
 } from 'lucide-react';
 
 export const StaffDashboard: React.FC = () => {
@@ -162,7 +163,7 @@ export const StaffDashboard: React.FC = () => {
       {/* Toast Alert */}
       {toast && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 p-3 px-5 bg-[#1a1a24] border border-gold-border text-white text-xs rounded-2xl shadow-2xl flex items-center gap-2">
-          <span>✨</span>
+          <Sparkles className="w-4 h-4 text-gold-primary" />
           <span>{toast}</span>
         </div>
       )}
@@ -335,8 +336,9 @@ export const StaffDashboard: React.FC = () => {
               </div>
 
               <div className="text-xs text-slate-300 flex items-center gap-3">
-                <span className="font-semibold text-white">
-                  🕐 Ore {b.orario_prenotazione.slice(0, 5)}
+                <span className="font-semibold text-white flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5 text-slate-400" />
+                  Ore {b.orario_prenotazione.slice(0, 5)}
                 </span>
                 <span>•</span>
                 <span className="font-semibold text-gold-primary">
@@ -349,8 +351,9 @@ export const StaffDashboard: React.FC = () => {
               </div>
 
               {b.esigenze_alimentari.length > 0 && (
-                <div className="text-[11px] text-amber-400 font-medium">
-                  ⚠️ Allergeni: {b.esigenze_alimentari.join(', ')}
+                <div className="text-[11px] text-amber-400 font-medium flex items-center gap-1.5">
+                  <AlertTriangle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span>Allergeni: {b.esigenze_alimentari.join(', ')}</span>
                 </div>
               )}
 

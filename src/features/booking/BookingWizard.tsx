@@ -5,7 +5,7 @@ import confetti from 'canvas-confetti';
 import { 
   Users, Calendar as CalendarIcon, Clock, Check, ArrowRight, 
   MapPin, Sparkles, Heart, Wine, PartyPopper, Briefcase, 
-  Share2, CalendarPlus, RotateCcw
+  Share2, CalendarPlus, RotateCcw, Home, Trees
 } from 'lucide-react';
 
 const SHIFTS = [
@@ -27,11 +27,11 @@ const SHIFTS = [
 ];
 
 const ALLERGEN_OPTIONS = [
-  { id: 'Gluten Free', label: '🌾 Senza Glutine' },
-  { id: 'Senza Lattosio', label: '🥛 Senza Lattosio' },
-  { id: 'Vegetariano', label: '🥗 Vegetariano' },
-  { id: 'Vegano', label: '🌱 Vegano' },
-  { id: 'Seggiolone Bimbi', label: '👶 Seggiolone' }
+  { id: 'Gluten Free', label: 'Senza Glutine' },
+  { id: 'Senza Lattosio', label: 'Senza Lattosio' },
+  { id: 'Vegetariano', label: 'Vegetariano' },
+  { id: 'Vegano', label: 'Vegano' },
+  { id: 'Seggiolone Bimbi', label: 'Seggiolone Bimbi' }
 ];
 
 export const BookingWizard: React.FC = () => {
@@ -201,9 +201,9 @@ export const BookingWizard: React.FC = () => {
   };
 
   const tableLabels = {
-    interna: '🏛️ Sala Interna',
-    dehor: '🌿 Dehor Riscaldato',
-    terrazza: '✨ Terrazza Panoramica',
+    interna: 'Sala Interna',
+    dehor: 'Dehor Riscaldato',
+    terrazza: 'Terrazza Panoramica',
     nessuna: 'Miglior Tavolo'
   };
 
@@ -307,26 +307,31 @@ export const BookingWizard: React.FC = () => {
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { id: 'interna' as TableArea, title: 'Sala Interna', desc: 'Design intimo e luci soffuse.', icon: '🏛️' },
-                { id: 'dehor' as TableArea, title: 'Dehor Riscaldato', desc: 'Esterno coperto e confortevole.', icon: '🌿' },
-                { id: 'terrazza' as TableArea, title: 'Terrazza', desc: 'Scorcio panoramico su Conversano.', icon: '✨' }
-              ].map(opt => (
-                <div
-                  key={opt.id}
-                  onClick={() => setTableArea(opt.id)}
-                  className={`p-4 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between ${
-                    tableArea === opt.id
-                      ? 'bg-gold-primary/15 border-gold-primary shadow-[0_0_20px_rgba(226,188,112,0.15)]'
-                      : 'bg-black/30 border-white/10 hover:border-white/20'
-                  }`}
-                >
-                  <span className="text-2xl mb-2">{opt.icon}</span>
-                  <div>
-                    <strong className="block font-heading font-bold text-sm text-white">{opt.title}</strong>
-                    <span className="text-[11px] text-slate-400 block mt-1 leading-snug">{opt.desc}</span>
+                { id: 'interna' as TableArea, title: 'Sala Interna', desc: 'Design intimo e luci soffuse.', icon: Home },
+                { id: 'dehor' as TableArea, title: 'Dehor Riscaldato', desc: 'Esterno coperto e confortevole.', icon: Trees },
+                { id: 'terrazza' as TableArea, title: 'Terrazza', desc: 'Scorcio panoramico su Conversano.', icon: Sparkles }
+              ].map(opt => {
+                const IconComponent = opt.icon;
+                return (
+                  <div
+                    key={opt.id}
+                    onClick={() => setTableArea(opt.id)}
+                    className={`p-4 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between ${
+                      tableArea === opt.id
+                        ? 'bg-gold-primary/15 border-gold-primary shadow-[0_0_20px_rgba(226,188,112,0.15)]'
+                        : 'bg-black/30 border-white/10 hover:border-white/20'
+                    }`}
+                  >
+                    <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gold-primary mb-3">
+                      <IconComponent className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <strong className="block font-heading font-bold text-sm text-white">{opt.title}</strong>
+                      <span className="text-[11px] text-slate-400 block mt-1 leading-snug">{opt.desc}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -525,8 +530,9 @@ export const BookingWizard: React.FC = () => {
               <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
                 Confermata
               </span>
-              <span className="block text-[10px] text-slate-500 mt-1">
-                {confirmSource === 'supabase' ? '🟢 Sincronizzato Supabase' : '🟡 Modalità Locale'}
+              <span className="inline-flex items-center gap-1.5 text-[10px] text-slate-400 mt-1">
+                <span className={`w-1.5 h-1.5 rounded-full ${confirmSource === 'supabase' ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+                <span>{confirmSource === 'supabase' ? 'Sincronizzato Supabase' : 'Modalità Locale'}</span>
               </span>
             </div>
           </div>

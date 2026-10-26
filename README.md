@@ -1,10 +1,10 @@
-# 🥂 Savì Conversano - Modern Booking Web App (React 19 + Vite + TypeScript + Tailwind + Supabase)
+# Savì Conversano - Modern Booking Web App (React 19 + Vite + TypeScript + Tailwind + Supabase)
 
 Applicazione contemporanea per le prenotazioni di **Savì - Not Ordinary Crepes** (Conversano, dal 1995), creata con uno stack tecnologico all'avanguardia: **React 19**, **Vite 6**, **TypeScript**, **TailwindCSS** e **Supabase**.
 
 ---
 
-## ⚡ Caratteristiche Principali
+## Caratteristiche Principali
 
 - **Stack Moderno & Reattivo**: Sviluppata con React 19 e Vite, con Hot Module Replacement (HMR) istantaneo.
 - **Tipizzazione Rigorosa con TypeScript**: Modello dati per prenotazioni, tavoli, fasce di servizio e metriche KPI completamente tipizzato.
@@ -21,15 +21,15 @@ Applicazione contemporanea per le prenotazioni di **Savì - Not Ordinary Crepes*
 
 ---
 
-## 🚀 Comandi Disponibili
+## Comandi Disponibili
 
-Dalla cartella del progetto (`c:\xampp\htdocs\v.tradotta\booking-app`):
+Dalla cartella del progetto (`c:\xampp\htdocs\booking-app`):
 
 ### 1. Avvio in Sviluppo (Dev Server)
 ```bash
 npm run dev
 ```
-Avvia il server di sviluppo ultra-rapido all'indirizzo `http://localhost:5173/`.
+Avvia il server di sviluppo all'indirizzo `http://localhost:5173/`.
 
 ### 2. Compilazione di Produzione (Build per XAMPP o Cloud)
 ```bash
@@ -46,7 +46,7 @@ npm run preview
 
 ---
 
-## 🗄️ Configurazione Database Supabase
+## Configurazione Database Supabase
 
 1. Accedi alla dashboard del tuo progetto su [Supabase](https://supabase.com/dashboard).
 2. Apri la sezione **SQL Editor**.
@@ -55,7 +55,7 @@ npm run preview
 
 ---
 
-## 📁 Struttura della Cartella
+## Struttura della Cartella
 
 ```text
 booking-app/
