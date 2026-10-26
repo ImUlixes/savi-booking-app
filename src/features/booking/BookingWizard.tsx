@@ -5,7 +5,7 @@ import confetti from 'canvas-confetti';
 import { 
   Users, Calendar as CalendarIcon, Clock, Check, ArrowRight, 
   MapPin, Sparkles, Heart, Wine, PartyPopper, Briefcase, 
-  Share2, CalendarPlus, RotateCcw, Home, Trees
+  Share2, CalendarPlus, RotateCcw, Home, Trees, Minus, Plus
 } from 'lucide-react';
 
 const SHIFTS = [
@@ -260,9 +260,10 @@ export const BookingWizard: React.FC = () => {
               type="button"
               disabled={guests <= 1}
               onClick={() => setGuests(prev => Math.max(1, prev - 1))}
-              className="w-12 h-12 rounded-full bg-[#1e1e28] text-white hover:bg-white hover:text-black disabled:opacity-30 disabled:hover:bg-[#1e1e28] disabled:hover:text-white transition-all text-2xl flex items-center justify-center font-bold active:scale-95"
+              className="w-12 h-12 rounded-full bg-[#1e1e28] border border-white/10 text-white hover:bg-white hover:text-black hover:border-white disabled:opacity-30 disabled:hover:bg-[#1e1e28] disabled:hover:text-white disabled:hover:border-white/10 transition-all flex items-center justify-center active:scale-95 shadow-sm shrink-0"
+              aria-label="Diminuisci coperti"
             >
-              −
+              <Minus className="w-5 h-5 stroke-[2.5]" />
             </button>
             <div className="text-center">
               <span className="font-heading font-extrabold text-4xl text-white block leading-none">
@@ -276,9 +277,10 @@ export const BookingWizard: React.FC = () => {
               type="button"
               disabled={guests >= 15}
               onClick={() => setGuests(prev => Math.min(15, prev + 1))}
-              className="w-12 h-12 rounded-full bg-[#1e1e28] text-white hover:bg-white hover:text-black disabled:opacity-30 disabled:hover:bg-[#1e1e28] disabled:hover:text-white transition-all text-2xl flex items-center justify-center font-bold active:scale-95"
+              className="w-12 h-12 rounded-full bg-[#1e1e28] border border-white/10 text-white hover:bg-white hover:text-black hover:border-white disabled:opacity-30 disabled:hover:bg-[#1e1e28] disabled:hover:text-white disabled:hover:border-white/10 transition-all flex items-center justify-center active:scale-95 shadow-sm shrink-0"
+              aria-label="Aumenta coperti"
             >
-              +
+              <Plus className="w-5 h-5 stroke-[2.5]" />
             </button>
           </div>
 
