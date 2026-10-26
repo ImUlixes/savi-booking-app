@@ -1,0 +1,2 @@
+DirectoryIndex dist/index.html index.html index.php
+FallbackResource dist/index.html
