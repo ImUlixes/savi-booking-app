@@ -42,14 +42,14 @@ export const BookingLookup: React.FC = () => {
       
       {/* Search Header */}
       <div className="bg-[#14141e]/80 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
-        <span className="text-[11px] font-bold tracking-widest text-gold-primary uppercase block mb-1">
+        <span className="text-[11px] font-bold tracking-widest text-slate-400 uppercase block mb-1">
           Self-Service Cliente
         </span>
         <h2 className="font-heading font-bold text-2xl text-white mb-2">
           Trova la tua Prenotazione
         </h2>
         <p className="text-xs text-slate-400 mb-5 leading-relaxed">
-          Inserisci il codice di conferma (es. <code className="text-gold-primary font-bold">SAVI-8120</code>) oppure il tuo numero di cellulare per visualizzare i dettagli o disdire.
+          Inserisci il codice di conferma (es. <code className="text-white font-bold">SAVI-8120</code>) oppure il tuo numero di cellulare per visualizzare i dettagli o disdire.
         </p>
 
         <form onSubmit={handleSearch} className="flex gap-2">
@@ -58,12 +58,12 @@ export const BookingLookup: React.FC = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Codice prenotazione o Cellulare..."
-            className="flex-1 bg-[#0a0a0f] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-primary transition-all placeholder:text-slate-500"
+            className="flex-1 bg-[#0a0a0f] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-white transition-all placeholder:text-slate-500"
           />
           <button
             type="submit"
             disabled={isLoading}
-            className="bg-gradient-to-r from-gold-hover to-gold-primary text-black font-heading font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl hover:opacity-90 active:scale-95 transition-all flex items-center gap-1.5 shadow-gold"
+            className="bg-white text-black font-heading font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl hover:bg-slate-200 active:scale-95 transition-all flex items-center gap-1.5 shadow-lg shadow-white/20"
           >
             <Search className="w-4 h-4" />
             <span>Cerca</span>
@@ -95,7 +95,7 @@ export const BookingLookup: React.FC = () => {
               >
                 <div className="flex items-start justify-between border-b border-white/10 pb-3">
                   <div>
-                    <span className="font-heading font-extrabold text-xl text-gold-primary">
+                    <span className="font-heading font-extrabold text-xl text-white">
                       {b.codice_prenotazione}
                     </span>
                     <span className="block text-xs text-slate-400 mt-0.5">
@@ -115,15 +115,15 @@ export const BookingLookup: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-3 text-xs text-slate-300">
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-gold-primary" />
+                    <Calendar className="w-4 h-4 text-white" />
                     <span>{b.data_prenotazione}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-gold-primary" />
+                    <Clock className="w-4 h-4 text-white" />
                     <span>Ore {b.orario_prenotazione.slice(0, 5)}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4 text-gold-primary" />
+                    <Users className="w-4 h-4 text-white" />
                     <span>{b.numero_ospiti} Coperti</span>
                   </div>
                   <div className="capitalize text-slate-400">

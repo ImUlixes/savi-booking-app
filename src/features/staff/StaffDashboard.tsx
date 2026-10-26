@@ -107,7 +107,7 @@ export const StaffDashboard: React.FC = () => {
     return (
       <div className="max-w-md mx-auto px-4 py-12">
         <div className="bg-[#14141e]/90 border border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl text-center space-y-6">
-          <div className="w-16 h-16 rounded-2xl bg-gold-primary/10 border border-gold-primary/30 text-gold-primary flex items-center justify-center mx-auto text-3xl">
+          <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 text-white flex items-center justify-center mx-auto text-3xl">
             <Shield className="w-8 h-8" />
           </div>
 
@@ -131,12 +131,12 @@ export const StaffDashboard: React.FC = () => {
               onChange={(e) => setPin(e.target.value)}
               placeholder="Inserisci PIN (demo: 1995)"
               autoFocus
-              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-4 py-3 text-center text-lg tracking-widest text-white focus:outline-none focus:border-gold-primary transition-all"
+              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-4 py-3 text-center text-lg tracking-widest text-white focus:outline-none focus:border-white transition-all"
             />
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-gold-hover via-gold-primary to-gold-dark text-black font-heading font-bold text-sm uppercase tracking-wider py-3.5 rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-gold"
+              className="w-full bg-white text-black font-heading font-bold text-sm uppercase tracking-wider py-3.5 rounded-xl hover:bg-slate-200 active:scale-95 transition-all shadow-lg shadow-white/20"
             >
               Accedi alla Gestione
             </button>
@@ -162,8 +162,8 @@ export const StaffDashboard: React.FC = () => {
       
       {/* Toast Alert */}
       {toast && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 p-3 px-5 bg-[#1a1a24] border border-gold-border text-white text-xs rounded-2xl shadow-2xl flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-gold-primary" />
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 p-3 px-5 bg-[#1a1a24] border border-white/20 text-white text-xs rounded-2xl shadow-2xl flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-white" />
           <span>{toast}</span>
         </div>
       )}
@@ -172,7 +172,7 @@ export const StaffDashboard: React.FC = () => {
       <div className="bg-[#14141e]/80 border border-white/10 rounded-3xl p-5 backdrop-blur-xl shadow-2xl space-y-4">
         <div className="flex items-center justify-between flex-wrap gap-3">
           <div>
-            <span className="text-[10px] font-bold tracking-widest text-gold-primary uppercase block">
+            <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase block">
               Dashboard Operativa
             </span>
             <h2 className="font-heading font-bold text-xl text-white">
@@ -184,7 +184,7 @@ export const StaffDashboard: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsManualModalOpen(true)}
-              className="bg-gradient-to-r from-gold-hover to-gold-primary text-black font-heading font-bold text-xs uppercase tracking-wider py-2 px-3.5 rounded-xl flex items-center gap-1.5 shadow-gold hover:opacity-90 transition-all"
+              className="bg-white text-black font-heading font-bold text-xs uppercase tracking-wider py-2 px-3.5 rounded-xl flex items-center gap-1.5 shadow-lg shadow-white/20 hover:bg-slate-200 transition-all"
             >
               <Plus className="w-4 h-4" />
               <span>Nuovo Walk-in</span>
@@ -206,14 +206,14 @@ export const StaffDashboard: React.FC = () => {
             type="date"
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
-            className="flex-1 min-w-[150px] bg-[#0a0a0f] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold-primary"
+            className="flex-1 min-w-[150px] bg-[#0a0a0f] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-white"
           />
           <button
             type="button"
             onClick={() => setSelectedDate(new Date().toISOString().split('T')[0])}
             className={`px-3 py-2 rounded-xl text-xs font-semibold border transition-all ${
               selectedDate === new Date().toISOString().split('T')[0]
-                ? 'bg-gold-primary/20 border-gold-primary text-gold-primary'
+                ? 'bg-white text-black border-white font-bold'
                 : 'bg-white/5 border-white/10 text-slate-400 hover:text-white'
             }`}
           >
@@ -232,7 +232,7 @@ export const StaffDashboard: React.FC = () => {
       {/* KPI Stats Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="bg-[#14141e]/70 border border-white/10 rounded-2xl p-4 text-center">
-          <span className="font-heading font-extrabold text-2xl text-gold-primary block">
+          <span className="font-heading font-extrabold text-2xl text-white block">
             {metrics.totaleCoperti}
           </span>
           <span className="text-[10px] text-slate-400 uppercase tracking-wider mt-1 block">
@@ -275,7 +275,7 @@ export const StaffDashboard: React.FC = () => {
               onClick={() => setStatusFilter(st)}
               className={`py-1.5 px-3 rounded-xl text-xs font-semibold capitalize whitespace-nowrap border transition-all ${
                 statusFilter === st
-                  ? 'bg-gold-primary text-black border-gold-primary font-bold'
+                  ? 'bg-white text-black border-white font-bold'
                   : 'bg-white/5 border-white/10 text-slate-400 hover:text-white'
               }`}
             >
@@ -291,7 +291,7 @@ export const StaffDashboard: React.FC = () => {
             value={searchFilter}
             onChange={(e) => setSearchFilter(e.target.value)}
             placeholder="Cerca cliente, telefono o codice..."
-            className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-gold-primary"
+            className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-white"
           />
         </div>
       </div>
@@ -311,13 +311,13 @@ export const StaffDashboard: React.FC = () => {
               <div className="flex items-start justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-heading font-bold text-lg text-gold-primary">
+                    <span className="font-heading font-bold text-lg text-white">
                       {b.codice_prenotazione}
                     </span>
                     <strong className="text-sm text-white">{b.nome_completo}</strong>
                   </div>
                   <div className="text-xs text-slate-400 mt-0.5 flex items-center gap-2">
-                    <a href={`tel:${b.telefono}`} className="text-gold-primary underline hover:text-white">
+                    <a href={`tel:${b.telefono}`} className="text-slate-300 underline hover:text-white">
                       {b.telefono}
                     </a>
                     {b.email && <span>• {b.email}</span>}
@@ -341,7 +341,7 @@ export const StaffDashboard: React.FC = () => {
                   Ore {b.orario_prenotazione.slice(0, 5)}
                 </span>
                 <span>•</span>
-                <span className="font-semibold text-gold-primary">
+                <span className="font-semibold text-white">
                   {b.numero_ospiti} Coperti
                 </span>
                 <span>•</span>
@@ -496,7 +496,7 @@ export const StaffDashboard: React.FC = () => {
               <div className="pt-3 flex gap-2">
                 <button
                   type="submit"
-                  className="flex-1 bg-gradient-to-r from-gold-hover to-gold-primary text-black font-heading font-bold text-xs uppercase tracking-wider py-3 rounded-xl shadow-gold"
+                  className="flex-1 bg-white text-black font-heading font-bold text-xs uppercase tracking-wider py-3 rounded-xl hover:bg-slate-200 shadow-lg shadow-white/20"
                 >
                   Salva Prenotazione
                 </button>

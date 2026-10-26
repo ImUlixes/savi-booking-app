@@ -8,11 +8,11 @@ export default {
     extend: {
       colors: {
         gold: {
-          primary: '#e2bc70',
-          hover: '#efca83',
-          dark: '#b8862d',
-          subtle: 'rgba(226, 188, 112, 0.12)',
-          border: 'rgba(226, 188, 112, 0.28)'
+          primary: '#ffffff',
+          hover: '#f8fafc',
+          dark: '#e2e8f0',
+          subtle: 'rgba(255, 255, 255, 0.12)',
+          border: 'rgba(255, 255, 255, 0.3)'
         },
         dark: {
           base: '#070709',
@@ -26,8 +26,8 @@ export default {
         sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
       },
       boxShadow: {
-        luxury: '0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(226, 188, 112, 0.15)',
-        gold: '0 0 25px rgba(226, 188, 112, 0.25)'
+        luxury: '0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 255, 255, 0.15)',
+        gold: '0 0 25px rgba(255, 255, 255, 0.2)'
       }
     },
   },

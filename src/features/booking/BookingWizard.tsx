@@ -138,7 +138,7 @@ export const BookingWizard: React.FC = () => {
               particleCount: 80,
               spread: 60,
               origin: { y: 0.6 },
-              colors: ['#e2bc70', '#ffffff', '#caa04f']
+              colors: ['#ffffff', '#e2e8f0', '#94a3b8']
             });
           } catch (e) {
             // ignore
@@ -215,7 +215,7 @@ export const BookingWizard: React.FC = () => {
         <div className="relative flex items-center justify-between mb-8 px-3">
           <div className="absolute top-1/2 left-[12%] right-[12%] h-[2px] bg-white/10 -translate-y-1/2 z-0" />
           <div 
-            className="absolute top-1/2 left-[12%] h-[2px] bg-gradient-to-r from-gold-hover to-gold-primary -translate-y-1/2 z-0 transition-all duration-300" 
+            className="absolute top-1/2 left-[12%] h-[2px] bg-white -translate-y-1/2 z-0 transition-all duration-300" 
             style={{ width: `${(step - 1) * 38}%` }}
           />
 
@@ -227,9 +227,9 @@ export const BookingWizard: React.FC = () => {
               onClick={() => num < step && setStep(num)}
               className={`w-9 h-9 rounded-full flex items-center justify-center font-heading font-bold text-xs z-10 transition-all border ${
                 step === num
-                  ? 'bg-[#1a1a24] border-gold-primary text-gold-primary shadow-gold scale-110'
+                  ? 'bg-[#1a1a24] border-white text-white shadow-lg shadow-white/20 scale-110'
                   : step > num
-                  ? 'bg-gold-primary border-gold-primary text-black'
+                  ? 'bg-white border-white text-black'
                   : 'bg-[#101015] border-white/15 text-slate-500'
               }`}
             >
@@ -250,7 +250,7 @@ export const BookingWizard: React.FC = () => {
       {step === 1 && (
         <div className="bg-[#14141e]/80 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl space-y-6">
           <div>
-            <span className="text-[11px] font-bold tracking-widest text-gold-primary uppercase">Fase 1 di 3</span>
+            <span className="text-[11px] font-bold tracking-widest text-slate-400 uppercase">Fase 1 di 3</span>
             <h2 className="font-heading font-bold text-2xl text-white">Quanti sarete al tavolo?</h2>
           </div>
 
@@ -260,12 +260,12 @@ export const BookingWizard: React.FC = () => {
               type="button"
               disabled={guests <= 1}
               onClick={() => setGuests(prev => Math.max(1, prev - 1))}
-              className="w-12 h-12 rounded-full bg-[#1e1e28] text-white hover:bg-gold-primary hover:text-black disabled:opacity-30 disabled:hover:bg-[#1e1e28] disabled:hover:text-white transition-all text-2xl flex items-center justify-center font-bold active:scale-95"
+              className="w-12 h-12 rounded-full bg-[#1e1e28] text-white hover:bg-white hover:text-black disabled:opacity-30 disabled:hover:bg-[#1e1e28] disabled:hover:text-white transition-all text-2xl flex items-center justify-center font-bold active:scale-95"
             >
               −
             </button>
             <div className="text-center">
-              <span className="font-heading font-extrabold text-4xl text-gold-primary block leading-none">
+              <span className="font-heading font-extrabold text-4xl text-white block leading-none">
                 {guests}
               </span>
               <span className="text-[11px] text-slate-400 uppercase tracking-widest mt-1 block">
@@ -276,7 +276,7 @@ export const BookingWizard: React.FC = () => {
               type="button"
               disabled={guests >= 15}
               onClick={() => setGuests(prev => Math.min(15, prev + 1))}
-              className="w-12 h-12 rounded-full bg-[#1e1e28] text-white hover:bg-gold-primary hover:text-black disabled:opacity-30 disabled:hover:bg-[#1e1e28] disabled:hover:text-white transition-all text-2xl flex items-center justify-center font-bold active:scale-95"
+              className="w-12 h-12 rounded-full bg-[#1e1e28] text-white hover:bg-white hover:text-black disabled:opacity-30 disabled:hover:bg-[#1e1e28] disabled:hover:text-white transition-all text-2xl flex items-center justify-center font-bold active:scale-95"
             >
               +
             </button>
@@ -291,7 +291,7 @@ export const BookingWizard: React.FC = () => {
                 onClick={() => setGuests(num)}
                 className={`py-2 px-1 rounded-xl text-xs font-semibold border transition-all ${
                   guests === num
-                    ? 'bg-gold-primary/15 border-gold-primary text-gold-primary shadow-sm'
+                    ? 'bg-white text-black border-white shadow-sm font-bold'
                     : 'bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10'
                 }`}
               >
@@ -302,7 +302,7 @@ export const BookingWizard: React.FC = () => {
 
           {/* Scelta Atmosfera / Tavolo */}
           <div className="pt-2">
-            <span className="text-[11px] font-bold tracking-widest text-gold-primary uppercase block mb-3">
+            <span className="text-[11px] font-bold tracking-widest text-slate-400 uppercase block mb-3">
               Ambiente Desiderato
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -318,11 +318,11 @@ export const BookingWizard: React.FC = () => {
                     onClick={() => setTableArea(opt.id)}
                     className={`p-4 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between ${
                       tableArea === opt.id
-                        ? 'bg-gold-primary/15 border-gold-primary shadow-[0_0_20px_rgba(226,188,112,0.15)]'
+                        ? 'bg-white/10 border-white shadow-[0_0_20px_rgba(255,255,255,0.15)]'
                         : 'bg-black/30 border-white/10 hover:border-white/20'
                     }`}
                   >
-                    <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gold-primary mb-3">
+                    <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-3">
                       <IconComponent className="w-4 h-4" />
                     </div>
                     <div>
@@ -343,7 +343,7 @@ export const BookingWizard: React.FC = () => {
             <select
               value={occasion}
               onChange={(e) => setOccasion(e.target.value as Occasion)}
-              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-gold-primary transition-all"
+              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-white transition-all"
             >
               <option value="nessuna">Nessuna occasione particolare</option>
               <option value="romantica">Cena Romantica</option>
@@ -360,7 +360,7 @@ export const BookingWizard: React.FC = () => {
       {step === 2 && (
         <div className="bg-[#14141e]/80 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl space-y-6">
           <div>
-            <span className="text-[11px] font-bold tracking-widest text-gold-primary uppercase">Fase 2 di 3</span>
+            <span className="text-[11px] font-bold tracking-widest text-slate-400 uppercase">Fase 2 di 3</span>
             <h2 className="font-heading font-bold text-2xl text-white">Scegli Data e Turno</h2>
           </div>
 
@@ -373,7 +373,7 @@ export const BookingWizard: React.FC = () => {
                 onClick={() => setSelectedDate(item.dateStr)}
                 className={`flex-shrink-0 w-20 py-3.5 px-2 rounded-2xl border text-center transition-all flex flex-col items-center gap-1 ${
                   selectedDate === item.dateStr
-                    ? 'bg-gradient-to-br from-gold-hover via-gold-primary to-gold-dark text-black border-gold-primary shadow-gold scale-105'
+                    ? 'bg-white text-black border-white shadow-lg shadow-white/20 scale-105 font-bold'
                     : 'bg-black/40 border-white/10 text-slate-300 hover:border-white/25'
                 }`}
               >
@@ -410,7 +410,7 @@ export const BookingWizard: React.FC = () => {
                         }}
                         className={`py-2.5 px-2 rounded-xl text-sm font-heading font-bold border transition-all flex flex-col items-center justify-center ${
                           isSelected
-                            ? 'bg-gold-primary/20 border-gold-primary text-gold-primary shadow-sm'
+                            ? 'bg-white text-black border-white shadow-sm font-bold'
                             : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20'
                         }`}
                       >
@@ -430,7 +430,7 @@ export const BookingWizard: React.FC = () => {
       {step === 3 && (
         <div className="bg-[#14141e]/80 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl space-y-5">
           <div>
-            <span className="text-[11px] font-bold tracking-widest text-gold-primary uppercase">Fase 3 di 3</span>
+            <span className="text-[11px] font-bold tracking-widest text-slate-400 uppercase">Fase 3 di 3</span>
             <h2 className="font-heading font-bold text-2xl text-white">I Tuoi Dati per la Conferma</h2>
           </div>
 
@@ -443,7 +443,7 @@ export const BookingWizard: React.FC = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="es. Marco Rossi"
-              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-gold-primary transition-all"
+              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-white transition-all"
             />
           </div>
 
@@ -456,7 +456,7 @@ export const BookingWizard: React.FC = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="es. +39 347 1234567"
-              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-gold-primary transition-all"
+              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-white transition-all"
             />
           </div>
 
@@ -469,7 +469,7 @@ export const BookingWizard: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="es. marco@email.com"
-              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-gold-primary transition-all"
+              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-white transition-all"
             />
           </div>
 
@@ -488,7 +488,7 @@ export const BookingWizard: React.FC = () => {
                     onClick={() => toggleAllergen(item.id)}
                     className={`py-1.5 px-3 rounded-full text-xs font-medium border transition-all ${
                       isActive
-                        ? 'bg-gold-primary/20 border-gold-primary text-gold-primary font-semibold'
+                        ? 'bg-white text-black border-white font-semibold'
                         : 'bg-white/5 border-white/10 text-slate-400 hover:text-white'
                     }`}
                   >
@@ -508,7 +508,7 @@ export const BookingWizard: React.FC = () => {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Tavolo appartato, candelina di compleanno, seggiolone..."
-              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-gold-primary transition-all"
+              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-white transition-all"
             />
           </div>
         </div>
@@ -516,13 +516,13 @@ export const BookingWizard: React.FC = () => {
 
       {/* STEP 4: BIGLIETTO LUXURY BOARDING PASS DI CONFERMA */}
       {step === 4 && confirmedBooking && (
-        <div className="bg-gradient-to-b from-[#181824] to-[#0e0e14] border border-gold-border rounded-3xl p-6 shadow-2xl relative overflow-hidden space-y-6 animate-fade-in-up">
+        <div className="bg-gradient-to-b from-[#181824] to-[#0e0e14] border border-white/20 rounded-3xl p-6 shadow-2xl relative overflow-hidden space-y-6 animate-fade-in-up">
           <div className="flex items-start justify-between border-b border-dashed border-white/15 pb-5">
             <div>
               <span className="text-[10px] text-slate-400 uppercase tracking-widest block font-bold">
                 Codice Prenotazione
               </span>
-              <span className="font-heading font-extrabold text-3xl text-gold-primary tracking-wider">
+              <span className="font-heading font-extrabold text-3xl text-white tracking-wider">
                 {confirmedBooking.codice_prenotazione}
               </span>
             </div>
@@ -574,7 +574,7 @@ export const BookingWizard: React.FC = () => {
             <button
               type="button"
               onClick={downloadIcs}
-              className="flex-1 bg-gradient-to-r from-gold-hover to-gold-primary text-black font-heading font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-gold hover:opacity-90 transition-all"
+              className="flex-1 bg-white text-black font-heading font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-white/20 hover:bg-slate-200 transition-all"
             >
               <CalendarPlus className="w-4 h-4" />
               <span>Salva nel Calendario (.ics)</span>
@@ -593,7 +593,7 @@ export const BookingWizard: React.FC = () => {
             <button
               type="button"
               onClick={resetAll}
-              className="text-xs text-slate-400 hover:text-gold-primary transition-colors inline-flex items-center gap-1.5"
+              className="text-xs text-slate-400 hover:text-white transition-colors inline-flex items-center gap-1.5"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Effettua un'altra prenotazione</span>
@@ -611,7 +611,7 @@ export const BookingWizard: React.FC = () => {
                 {guests} {guests === 1 ? 'Ospite' : 'Ospiti'}
                 {selectedTime && ` • ${selectedTime}`}
               </span>
-              <span className="text-[11px] text-gold-primary font-medium block">
+              <span className="text-[11px] text-slate-400 font-medium block">
                 {step === 1 && 'Scegli data e orario →'}
                 {step === 2 && (selectedTime ? 'Orario confermato →' : 'Seleziona uno slot')}
                 {step === 3 && 'Savì Conversano'}
@@ -622,7 +622,7 @@ export const BookingWizard: React.FC = () => {
               type="button"
               disabled={isSubmitting}
               onClick={handleNext}
-              className="bg-gradient-to-r from-gold-hover via-gold-primary to-gold-dark text-black font-heading font-bold text-sm uppercase tracking-wider py-3 px-6 rounded-xl hover:opacity-90 active:scale-95 transition-all flex items-center gap-2 shadow-gold"
+              className="bg-white text-black font-heading font-bold text-sm uppercase tracking-wider py-3 px-6 rounded-xl hover:bg-slate-200 active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-white/20"
             >
               <span>{step === 1 ? 'Scegli Orario' : step === 2 ? 'Inserisci Dati' : 'Conferma Tavolo'}</span>
               <ArrowRight className="w-4 h-4" />

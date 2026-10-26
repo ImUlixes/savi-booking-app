@@ -26,14 +26,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange, onOpe
           onClick={() => onViewChange('booking')}
           className="flex items-center gap-3 cursor-pointer group"
         >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-gold-hover via-gold-primary to-gold-dark text-black font-heading font-extrabold text-lg flex items-center justify-center shadow-lg shadow-gold-primary/20 group-hover:scale-105 transition-transform">
+          <div className="w-9 h-9 rounded-xl bg-white text-black font-heading font-extrabold text-lg flex items-center justify-center shadow-lg shadow-white/20 group-hover:scale-105 transition-transform">
             S
           </div>
           <div className="flex flex-col">
             <span className="font-heading font-bold text-lg tracking-widest text-white leading-tight uppercase">
               SAVÌ
             </span>
-            <span className="text-[10px] tracking-widest text-gold-primary font-semibold uppercase">
+            <span className="text-[10px] tracking-widest text-slate-400 font-semibold uppercase">
               Conversano • 1995
             </span>
           </div>
@@ -45,7 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange, onOpe
           <button 
             type="button"
             onClick={onOpenSupabaseModal}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/5 border border-white/10 hover:border-gold-primary/40 hover:bg-white/10 transition-all text-slate-300"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/5 border border-white/10 hover:border-white/40 hover:bg-white/10 transition-all text-slate-300"
             title="Configura Database Supabase"
           >
             <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-amber-400 shadow-[0_0_8px_#fbbf24]'}`} />
@@ -58,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange, onOpe
             onClick={() => onViewChange(currentView === 'staff' ? 'booking' : 'staff')}
             className={`flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold transition-all border ${
               currentView === 'staff'
-                ? 'bg-gold-primary text-black border-gold-primary shadow-gold'
+                ? 'bg-white text-black border-white shadow-lg shadow-white/20'
                 : 'bg-white/5 text-slate-300 border-white/10 hover:border-white/20'
             }`}
           >
@@ -78,7 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange, onOpe
               onClick={() => onViewChange('booking')}
               className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                 currentView === 'booking'
-                  ? 'bg-[#1e1e28] text-gold-primary border border-gold-border shadow-md'
+                  ? 'bg-[#1e1e28] text-white border border-white/25 shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -90,7 +90,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange, onOpe
               onClick={() => onViewChange('lookup')}
               className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                 currentView === 'lookup'
-                  ? 'bg-[#1e1e28] text-gold-primary border border-gold-border shadow-md'
+                  ? 'bg-[#1e1e28] text-white border border-white/25 shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >

@@ -59,7 +59,7 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({ isOpen, onClose })
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <Database className="w-5 h-5 text-gold-primary" />
+            <Database className="w-5 h-5 text-white" />
             <h3 className="font-heading font-bold text-lg text-white uppercase tracking-wider">
               Database Supabase
             </h3>
@@ -97,7 +97,7 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({ isOpen, onClose })
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://your-project.supabase.co"
-              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-gold-primary transition-all"
+              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-white transition-all"
             />
           </div>
 
@@ -110,7 +110,7 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({ isOpen, onClose })
               value={key}
               onChange={(e) => setKey(e.target.value)}
               placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-gold-primary transition-all"
+              className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-white transition-all"
             />
           </div>
 
@@ -118,7 +118,7 @@ export const SupabaseModal: React.FC<SupabaseModalProps> = ({ isOpen, onClose })
             <button
               type="submit"
               disabled={statusMsg.type === 'loading'}
-              className="flex-1 bg-gradient-to-r from-gold-hover via-gold-primary to-gold-dark text-black font-heading font-bold text-sm uppercase tracking-wider py-3 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-gold-primary/20"
+              className="flex-1 bg-white text-black font-heading font-bold text-sm uppercase tracking-wider py-3 rounded-xl hover:bg-slate-200 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg shadow-white/20"
             >
               <Save className="w-4 h-4" />
               <span>Salva & Connetti</span>

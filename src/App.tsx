@@ -32,14 +32,14 @@ export const App: React.FC = () => {
           {currentView !== 'staff' ? (
             <button
               onClick={() => setCurrentView('staff')}
-              className="text-gold-primary/80 hover:text-gold-primary underline transition-colors"
+              className="text-slate-300 hover:text-white underline transition-colors"
             >
               Area Riservata Staff & Gestione Tavoli →
             </button>
           ) : (
             <button
               onClick={() => setCurrentView('booking')}
-              className="text-gold-primary/80 hover:text-gold-primary underline transition-colors"
+              className="text-slate-300 hover:text-white underline transition-colors"
             >
               ← Torna alle prenotazioni clienti
             </button>

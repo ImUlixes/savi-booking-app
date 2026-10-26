@@ -8,7 +8,7 @@ Applicazione contemporanea per le prenotazioni di **Savì - Not Ordinary Crepes*
 
 - **Stack Moderno & Reattivo**: Sviluppata con React 19 e Vite, con Hot Module Replacement (HMR) istantaneo.
 - **Tipizzazione Rigorosa con TypeScript**: Modello dati per prenotazioni, tavoli, fasce di servizio e metriche KPI completamente tipizzato.
-- **Design System Luxury & Mobile-First**: Palette dark oro (`#e2bc70`), tipografia editoriale (Jost + Plus Jakarta Sans), micro-animazioni tattili, celebrazione visiva con coriandoli dorati (`canvas-confetti`) e safe-area per smartphone iOS/Android.
+- **Design System Luxury & Mobile-First**: Palette dark monochrome black & white (`#070709` / `#ffffff`), tipografia editoriale (Jost + Plus Jakarta Sans), micro-animazioni tattili, celebrazione visiva con coriandoli (`canvas-confetti`) e safe-area per smartphone iOS/Android.
 - **Architettura Modulare**:
   - `src/features/booking/`: Wizard a 4 step per il cliente con selezione coperti da 1 a 15, scelta area tavolo (*Interna*, *Dehor*, *Terrazza*), slider orizzontale touch per 14 giorni, slot orari per turno e tag rapidi per celiachia/intolleranze.
   - `src/features/lookup/`: Ricerca e cancellazione autonoma della prenotazione per il cliente.
