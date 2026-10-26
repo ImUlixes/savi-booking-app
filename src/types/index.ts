@@ -16,6 +16,8 @@ export interface Booking {
   telefono: string;
   esigenze_alimentari: string[];
   note_speciali: string;
+  seggioloni?: number;
+  passeggini?: number;
   stato: BookingStatus;
   creato_il?: string;
   aggiornato_il?: string;

@@ -131,6 +131,21 @@ export const BookingLookup: React.FC = () => {
                   </div>
                 </div>
 
+                {((b.seggioloni && b.seggioloni > 0) || (b.passeggini && b.passeggini > 0)) && (
+                  <div className="flex flex-wrap gap-2 text-xs">
+                    {b.seggioloni && b.seggioloni > 0 && (
+                      <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-white font-medium border border-white/20">
+                        {b.seggioloni} {b.seggioloni === 1 ? 'Seggiolone' : 'Seggioloni'}
+                      </span>
+                    )}
+                    {b.passeggini && b.passeggini > 0 && (
+                      <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-white font-medium border border-white/20">
+                        {b.passeggini} {b.passeggini === 1 ? 'Passeggino' : 'Passeggini'}
+                      </span>
+                    )}
+                  </div>
+                )}
+
                 {b.note_speciali && (
                   <div className="text-xs text-slate-400 italic bg-black/30 p-2.5 rounded-xl border border-white/5">
                     "{b.note_speciali}"

@@ -30,8 +30,7 @@ const ALLERGEN_OPTIONS = [
   { id: 'Gluten Free', label: 'Senza Glutine' },
   { id: 'Senza Lattosio', label: 'Senza Lattosio' },
   { id: 'Vegetariano', label: 'Vegetariano' },
-  { id: 'Vegano', label: 'Vegano' },
-  { id: 'Seggiolone Bimbi', label: 'Seggiolone Bimbi' }
+  { id: 'Vegano', label: 'Vegano' }
 ];
 
 export const BookingWizard: React.FC = () => {
@@ -49,6 +48,12 @@ export const BookingWizard: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [allergens, setAllergens] = useState<string[]>([]);
   const [notes, setNotes] = useState<string>('');
+
+  // Dotazioni bambini
+  const [hasHighChair, setHasHighChair] = useState<boolean>(false);
+  const [highChairCount, setHighChairCount] = useState<number>(1);
+  const [hasStroller, setHasStroller] = useState<boolean>(false);
+  const [strollerCount, setStrollerCount] = useState<number>(1);
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null);
@@ -112,6 +117,14 @@ export const BookingWizard: React.FC = () => {
 
       setIsSubmitting(true);
       try {
+        const dietaryNeeds = [...allergens];
+        if (hasHighChair && highChairCount > 0) {
+          dietaryNeeds.push(`${highChairCount} ${highChairCount === 1 ? 'Seggiolone' : 'Seggioloni'}`);
+        }
+        if (hasStroller && strollerCount > 0) {
+          dietaryNeeds.push(`${strollerCount} ${strollerCount === 1 ? 'Passeggino' : 'Passeggini'}`);
+        }
+
         const res = await supabaseService.createBooking({
           data_prenotazione: selectedDate,
           orario_prenotazione: selectedTime,
@@ -122,8 +135,10 @@ export const BookingWizard: React.FC = () => {
           nome_completo: name.trim(),
           email: email.trim() || `${phone.replace(/\D/g, '')}@guest.savi.it`,
           telefono: phone.trim(),
-          esigenze_alimentari: allergens,
-          note_speciali: notes.trim()
+          esigenze_alimentari: dietaryNeeds,
+          note_speciali: notes.trim(),
+          seggioloni: hasHighChair ? highChairCount : 0,
+          passeggini: hasStroller ? strollerCount : 0
         });
 
         if (res.success) {
@@ -187,8 +202,17 @@ export const BookingWizard: React.FC = () => {
 
   const shareWhatsApp = () => {
     if (!confirmedBooking) return;
+    const kidsList: string[] = [];
+    if (confirmedBooking.seggioloni && confirmedBooking.seggioloni > 0) {
+      kidsList.push(`${confirmedBooking.seggioloni} seggiolon${confirmedBooking.seggioloni > 1 ? 'i' : 'e'}`);
+    }
+    if (confirmedBooking.passeggini && confirmedBooking.passeggini > 0) {
+      kidsList.push(`${confirmedBooking.passeggini} passeggin${confirmedBooking.passeggini > 1 ? 'i' : 'o'}`);
+    }
+    const kidsStr = kidsList.length > 0 ? ` (${kidsList.join(', ')})` : '';
+
     const text = encodeURIComponent(
-      `Ciao! Ti confermo la prenotazione da Savì a Conversano per ${confirmedBooking.numero_ospiti} persone il ${confirmedBooking.data_prenotazione} alle ${confirmedBooking.orario_prenotazione.slice(0, 5)}. Codice: ${confirmedBooking.codice_prenotazione}`
+      `Ciao! Ti confermo la prenotazione da Savì a Conversano per ${confirmedBooking.numero_ospiti} persone il ${confirmedBooking.data_prenotazione} alle ${confirmedBooking.orario_prenotazione.slice(0, 5)}${kidsStr}. Codice: ${confirmedBooking.codice_prenotazione}`
     );
     window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
   };
@@ -198,6 +222,10 @@ export const BookingWizard: React.FC = () => {
     setConfirmedBooking(null);
     setSelectedTime('');
     setNotes('');
+    setHasHighChair(false);
+    setHighChairCount(1);
+    setHasStroller(false);
+    setStrollerCount(1);
   };
 
   const tableLabels = {
@@ -501,6 +529,135 @@ export const BookingWizard: React.FC = () => {
             </div>
           </div>
 
+          {/* Dotazioni per Bambini (Seggioloni & Passeggini) */}
+          <div className="pt-2 space-y-3">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
+              Dotazioni per Bambini & Spazio Tavolo
+            </label>
+
+            {/* Checkbox Seggioloni */}
+            <div className={`border rounded-2xl p-4 transition-all space-y-3 ${
+              hasHighChair ? 'border-white/30 bg-white/[0.04]' : 'border-white/10 bg-black/30'
+            }`}>
+              <label className="flex items-center justify-between cursor-pointer select-none">
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    checked={hasHighChair}
+                    onChange={(e) => {
+                      setHasHighChair(e.target.checked);
+                      if (e.target.checked && highChairCount === 0) setHighChairCount(1);
+                    }}
+                    className="sr-only"
+                  />
+                  <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all shrink-0 ${
+                    hasHighChair ? 'bg-white border-white text-black' : 'border-white/30 bg-black/40'
+                  }`}>
+                    {hasHighChair && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                  </div>
+                  <div>
+                    <span className="font-heading font-semibold text-sm text-white block">
+                      Seggiolone per bambini
+                    </span>
+                    <span className="text-[11px] text-slate-400 block">
+                      Richiedi uno o più seggioloni già pronti al tavolo
+                    </span>
+                  </div>
+                </div>
+              </label>
+
+              {hasHighChair && (
+                <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                  <span className="text-xs text-slate-300 font-medium">Quanti seggioloni servono?</span>
+                  <div className="flex items-center gap-3 bg-[#1e1e28] border border-white/10 rounded-xl px-2 py-1">
+                    <button
+                      type="button"
+                      disabled={highChairCount <= 1}
+                      onClick={() => setHighChairCount(prev => Math.max(1, prev - 1))}
+                      className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-white transition-all flex items-center justify-center active:scale-95"
+                      aria-label="Riduci seggioloni"
+                    >
+                      <Minus className="w-3.5 h-3.5 stroke-[2.5]" />
+                    </button>
+                    <span className="font-heading font-bold text-sm text-white w-4 text-center">
+                      {highChairCount}
+                    </span>
+                    <button
+                      type="button"
+                      disabled={highChairCount >= 5}
+                      onClick={() => setHighChairCount(prev => Math.min(5, prev + 1))}
+                      className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-white transition-all flex items-center justify-center active:scale-95"
+                      aria-label="Aumenta seggioloni"
+                    >
+                      <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Checkbox Passeggini */}
+            <div className={`border rounded-2xl p-4 transition-all space-y-3 ${
+              hasStroller ? 'border-white/30 bg-white/[0.04]' : 'border-white/10 bg-black/30'
+            }`}>
+              <label className="flex items-center justify-between cursor-pointer select-none">
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    checked={hasStroller}
+                    onChange={(e) => {
+                      setHasStroller(e.target.checked);
+                      if (e.target.checked && strollerCount === 0) setStrollerCount(1);
+                    }}
+                    className="sr-only"
+                  />
+                  <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all shrink-0 ${
+                    hasStroller ? 'bg-white border-white text-black' : 'border-white/30 bg-black/40'
+                  }`}>
+                    {hasStroller && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                  </div>
+                  <div>
+                    <span className="font-heading font-semibold text-sm text-white block">
+                      Spazio per passeggino
+                    </span>
+                    <span className="text-[11px] text-slate-400 block">
+                      Tavolo con spazio e passaggio comodo per passeggino
+                    </span>
+                  </div>
+                </div>
+              </label>
+
+              {hasStroller && (
+                <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                  <span className="text-xs text-slate-300 font-medium">Quanti passeggini saranno presenti?</span>
+                  <div className="flex items-center gap-3 bg-[#1e1e28] border border-white/10 rounded-xl px-2 py-1">
+                    <button
+                      type="button"
+                      disabled={strollerCount <= 1}
+                      onClick={() => setStrollerCount(prev => Math.max(1, prev - 1))}
+                      className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-white transition-all flex items-center justify-center active:scale-95"
+                      aria-label="Riduci passeggini"
+                    >
+                      <Minus className="w-3.5 h-3.5 stroke-[2.5]" />
+                    </button>
+                    <span className="font-heading font-bold text-sm text-white w-4 text-center">
+                      {strollerCount}
+                    </span>
+                    <button
+                      type="button"
+                      disabled={strollerCount >= 4}
+                      onClick={() => setStrollerCount(prev => Math.min(4, prev + 1))}
+                      className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-white transition-all flex items-center justify-center active:scale-95"
+                      aria-label="Aumenta passeggini"
+                    >
+                      <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
               Note Particolari o Richieste Speciali
@@ -561,8 +718,23 @@ export const BookingWizard: React.FC = () => {
           </div>
 
           {confirmedBooking.esigenze_alimentari.length > 0 && (
-            <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs text-amber-300">
-              <strong>Allergeni segnalati:</strong> {confirmedBooking.esigenze_alimentari.join(', ')}
+            <div className="p-3 bg-white/5 border border-white/15 rounded-xl text-xs text-slate-200">
+              <strong>Allergeni e dotazioni:</strong> {confirmedBooking.esigenze_alimentari.join(', ')}
+            </div>
+          )}
+
+          {((confirmedBooking.seggioloni && confirmedBooking.seggioloni > 0) || (confirmedBooking.passeggini && confirmedBooking.passeggini > 0)) && (
+            <div className="flex flex-wrap gap-2 text-xs">
+              {confirmedBooking.seggioloni && confirmedBooking.seggioloni > 0 && (
+                <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white font-medium">
+                  {confirmedBooking.seggioloni} {confirmedBooking.seggioloni === 1 ? 'Seggiolone' : 'Seggioloni'}
+                </span>
+              )}
+              {confirmedBooking.passeggini && confirmedBooking.passeggini > 0 && (
+                <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white font-medium">
+                  {confirmedBooking.passeggini} {confirmedBooking.passeggini === 1 ? 'Passeggino' : 'Passeggini'}
+                </span>
+              )}
             </div>
           )}
 

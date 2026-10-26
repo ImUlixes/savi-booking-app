@@ -30,6 +30,8 @@ export const StaffDashboard: React.FC = () => {
   const [manualTime, setManualTime] = useState('20:30');
   const [manualTable, setManualTable] = useState<TableArea>('interna');
   const [manualNotes, setManualNotes] = useState('');
+  const [manualHighChairs, setManualHighChairs] = useState(0);
+  const [manualStrollers, setManualStrollers] = useState(0);
 
   const handleUnlock = (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,7 +91,12 @@ export const StaffDashboard: React.FC = () => {
       nome_completo: manualName.trim(),
       email: `${manualPhone.replace(/\D/g, '')}@walkin.savi.it`,
       telefono: manualPhone.trim(),
-      esigenze_alimentari: [],
+      esigenze_alimentari: [
+        ...(manualHighChairs > 0 ? [`${manualHighChairs} Seggiolon${manualHighChairs > 1 ? 'i' : 'e'}`] : []),
+        ...(manualStrollers > 0 ? [`${manualStrollers} Passeggin${manualStrollers > 1 ? 'i' : 'o'}`] : [])
+      ],
+      seggioloni: manualHighChairs,
+      passeggini: manualStrollers,
       note_speciali: manualNotes ? `[Walk-in / Telefono] ${manualNotes}` : '[Inserito da Staff]'
     });
 
@@ -97,6 +104,8 @@ export const StaffDashboard: React.FC = () => {
     setManualName('');
     setManualPhone('');
     setManualNotes('');
+    setManualHighChairs(0);
+    setManualStrollers(0);
     setToast('Prenotazione aggiunta con successo!');
     loadData();
     setTimeout(() => setToast(''), 3000);
@@ -350,6 +359,21 @@ export const StaffDashboard: React.FC = () => {
                 </span>
               </div>
 
+              {((b.seggioloni && b.seggioloni > 0) || (b.passeggini && b.passeggini > 0)) && (
+                <div className="flex gap-2 text-[10px]">
+                  {b.seggioloni && b.seggioloni > 0 && (
+                    <span className="px-2 py-0.5 rounded-md bg-white/10 text-white font-medium border border-white/20">
+                      {b.seggioloni} {b.seggioloni === 1 ? 'Seggiolone' : 'Seggioloni'}
+                    </span>
+                  )}
+                  {b.passeggini && b.passeggini > 0 && (
+                    <span className="px-2 py-0.5 rounded-md bg-white/10 text-white font-medium border border-white/20">
+                      {b.passeggini} {b.passeggini === 1 ? 'Passeggino' : 'Passeggini'}
+                    </span>
+                  )}
+                </div>
+              )}
+
               {b.esigenze_alimentari.length > 0 && (
                 <div className="text-[11px] text-amber-400 font-medium flex items-center gap-1.5">
                   <AlertTriangle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
@@ -479,6 +503,31 @@ export const StaffDashboard: React.FC = () => {
                     <option value="dehor">Dehor</option>
                     <option value="terrazza">Terrazza</option>
                   </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-slate-400 mb-1">Seggioloni</label>
+                  <input
+                    type="number"
+                    min={0}
+                    max={5}
+                    value={manualHighChairs}
+                    onChange={(e) => setManualHighChairs(Number(e.target.value))}
+                    className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3 py-2 text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-400 mb-1">Passeggini</label>
+                  <input
+                    type="number"
+                    min={0}
+                    max={5}
+                    value={manualStrollers}
+                    onChange={(e) => setManualStrollers(Number(e.target.value))}
+                    className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-3 py-2 text-white"
+                  />
                 </div>
               </div>
 
